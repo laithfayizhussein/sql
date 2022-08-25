@@ -5,7 +5,10 @@ import '../design/constant.dart';
 import '../screens/notes_screen.dart';
 
 class CategoriesWidget extends StatelessWidget {
-  var hello =
+  final String id;
+  final String categoriesText;
+  CategoriesWidget(this.id, this.categoriesText);
+  var randomeColor =
       Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
   @override
   Widget build(BuildContext context) {
@@ -21,14 +24,15 @@ class CategoriesWidget extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.all(10),
             child: Text(
-              'sport',
+              '${categoriesText}',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color:
-                      hello == Color(0xFFFFFF) ? Colors.black : Colors.white),
+                  color: randomeColor == Color(0xFFFFFF)
+                      ? Colors.black
+                      : Colors.white),
             ),
-            color: hello,
+            color: randomeColor,
             margin: EdgeInsets.all(10),
           ),
         ),
