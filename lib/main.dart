@@ -4,6 +4,7 @@ import 'package:sql/providers/categories_provider.dart';
 
 import './screens/notes_screen.dart';
 import './screens/categroies_screen.dart';
+import './screens/add_categories.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         routes: {
           CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
           NoteScreen.routeName: (ctx) => NoteScreen(),
+          AddCategories.routeName: (ctx) => AddCategories(),
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sql/screens/add_categories.dart';
 import 'dart:math' as math;
 
 import '../design/constant.dart';
@@ -18,6 +19,10 @@ class CategoriesWidget extends StatelessWidget {
       ),
       child: GridTile(
         child: GestureDetector(
+          onLongPress: () {
+            Navigator.pushNamed(context, AddCategories.routeName,
+                arguments: id);
+          },
           onTap: () {
             Navigator.pushNamed(context, NoteScreen.routeName);
           },

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/categories_provider.dart';
 import '../widgets/categories_widget.dart';
+import './add_categories.dart';
 
 class CategoriesScreen extends StatelessWidget {
   static const String routeName = 'CategoriesScreen';
@@ -13,7 +14,13 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Name'),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AddCategories.routeName);
+              },
+              icon: Icon(Icons.add))
+        ],
       ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

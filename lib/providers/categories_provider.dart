@@ -4,13 +4,36 @@ import '../models/categories_model.dart';
 
 class UserCategories with ChangeNotifier {
   List<CategoriesModel> _items = [
-    CategoriesModel('sport', '1'),
-    CategoriesModel('hhhhhh', '2'),
-    CategoriesModel('ffffff', '3'),
+    // CategoriesModel(content: 'jjjj', id: '2'),
+    // CategoriesModel(content: 'content', id: '3'),
+    // CategoriesModel(content: 'content', id: '4'),
   ];
 
   List<CategoriesModel> get items {
     return [..._items];
+  }
+
+  CategoriesModel findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+  }
+
+  addCategories(CategoriesModel cat) {
+    print('add method');
+    final newCategories =
+        CategoriesModel(content: cat.content, id: DateTime.now().toString());
+    items.insert(1, newCategories);
+    notifyListeners();
+  }
+
+  Future<void> updateCategories(String id, CategoriesModel forEditing) async {
+    final carIndex = _items.indexWhere((element) => element.id == id);
+    print({carIndex, 'carIndex'});
+    if (carIndex >= 0) {
+      _items[carIndex] = forEditing;
+      notifyListeners();
+    } else {
+      print('............');
+    }
   }
 
   notifyListeners();
