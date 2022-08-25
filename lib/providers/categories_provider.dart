@@ -21,7 +21,7 @@ class UserCategories with ChangeNotifier {
     print('add method');
     final newCategories =
         CategoriesModel(content: cat.content, id: DateTime.now().toString());
-    items.insert(1, newCategories);
+    _items.add(newCategories);
     notifyListeners();
   }
 
