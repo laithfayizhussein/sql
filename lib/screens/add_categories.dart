@@ -13,7 +13,7 @@ class AddCategories extends StatefulWidget {
 
 class _AddCategoriesState extends State<AddCategories> {
   final _formKey = GlobalKey<FormState>();
-  var _editedCategoires = CategoriesModel(content: '', id: '');
+  var _editedCategoires = CategoriesModel('', '');
   var _initValues = {
     'content': '',
   };
@@ -24,10 +24,10 @@ class _AddCategoriesState extends State<AddCategories> {
     if (_isInit) {
       final categoriesId =
           ModalRoute.of(context)!.settings.arguments as String?;
-      print({categoriesId, 'categoriesId'});
       if (categoriesId != null) {
         _editedCategoires = Provider.of<UserCategories>(context, listen: false)
             .findById(categoriesId);
+
         _initValues = {
           'content': _editedCategoires.content,
         };
@@ -46,7 +46,7 @@ class _AddCategoriesState extends State<AddCategories> {
       return;
     }
     _formKey.currentState!.save();
-    if (_editedCategoires.id == 'null' || _editedCategoires.id.isEmpty) {
+    if (_editedCategoires.id == 'null' || _editedCategoires.id!.isEmpty) {
       try {
         print('is empty');
         await Provider.of<UserCategories>(context, listen: false)
@@ -56,47 +56,50 @@ class _AddCategoriesState extends State<AddCategories> {
       }
     } else {
       await Provider.of<UserCategories>(context, listen: false)
-          .updateCategories(_editedCategoires.id, _editedCategoires);
+          .updateCategories(_editedCategoires.id!, _editedCategoires);
+      print({'_editedCategoires update', _editedCategoires});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                initialValue: _initValues['content'],
-                decoration: InputDecoration(labelText: 'content'),
-                validator: (value) {
-                  return value!.isNotEmpty ? null : "Enter any text";
-                },
-                onSaved: (val) {
-                  _editedCategoires = CategoriesModel(
-                      content: val.toString(), id: _editedCategoires.id);
-                },
-              ),
-            ],
-          )),
-      title: Text('Add Your Categories'),
-      actions: <Widget>[
-        InkWell(
-          child: Text('OK'),
-          onTap: () {
-            setState(() {
-              _saveForm();
-            });
+    return Center(
+      child: AlertDialog(
+        content: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  initialValue: _initValues['content'],
+                  decoration: InputDecoration(labelText: 'content'),
+                  validator: (value) {
+                    return value!.isNotEmpty ? null : "Enter any text";
+                  },
+                  onSaved: (val) {
+                    _editedCategoires =
+                        CategoriesModel(val.toString(), _editedCategoires.id);
+                  },
+                ),
+              ],
+            )),
+        title: Text('Add Your Categories'),
+        actions: <Widget>[
+          InkWell(
+            child: Text('OK'),
+            onTap: () {
+              setState(() {
+                _saveForm();
+              });
 
-            print('ok');
+              print('ok');
 
-            // Do something like updating SharedPreferences or User Settings etc.
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
+              // Do something like updating SharedPreferences or User Settings etc.
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
