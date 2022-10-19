@@ -40,7 +40,8 @@ class _CategoriesWidgetState extends State<CategoriesWidget> {
                 arguments: widget.id);
           },
           onTap: () {
-            Navigator.pushNamed(context, NoteScreen.routeName);
+            Navigator.pushNamed(context, NoteScreen.routeName,
+                arguments: widget.categoriesText);
           },
           child: Container(
             padding: EdgeInsets.all(10),

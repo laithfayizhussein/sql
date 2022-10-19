@@ -25,11 +25,11 @@ class UserCategories with ChangeNotifier {
     final newCategories = CategoriesModel(cat.content, cat.id);
     _items.add(newCategories);
     notifyListeners();
-    sql.insertDb('categories', {'text': newCategories.content});
+    sql.insertDb({'text': newCategories.content});
   }
 
   Future<void> fetchDataFromDb() async {
-    final dataList = await sql.getData('categories');
+    final dataList = await sql.getData();
     print({'dataList', dataList});
     _items = dataList
         .map((item) => CategoriesModel(

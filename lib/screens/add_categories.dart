@@ -63,8 +63,8 @@ class _AddCategoriesState extends State<AddCategories> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: AlertDialog(
+    return Scaffold(
+      body: AlertDialog(
         content: Form(
             key: _formKey,
             child: Column(

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sql/providers/categories_provider.dart';
 
-import './screens/notes_screen.dart';
 import './screens/categroies_screen.dart';
 import './screens/add_categories.dart';
+import './screens/notes_screen.dart';
+import './screens/add_note.dart';
 import './design/constant.dart';
 
 void main() {
@@ -35,8 +36,9 @@ class MyApp extends StatelessWidget {
         home: CategoriesScreen(),
         routes: {
           CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
-          NoteScreen.routeName: (ctx) => NoteScreen(),
           AddCategories.routeName: (ctx) => AddCategories(),
+          NoteScreen.routeName: (ctx) => NoteScreen(),
+          AddNote.routeName: (ctx) => AddNote(),
         },
       ),
     );

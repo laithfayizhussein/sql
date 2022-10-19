@@ -26,28 +26,28 @@ class CategoriesScreen extends StatelessWidget {
           ],
         ),
         body: FutureBuilder(
-            future: Provider.of<UserCategories>(context, listen: false)
-                .fetchDataFromDb(),
-            builder: (context, snapshot) {
-              return Consumer<UserCategories>(
-                builder: (context, userCat, ch) => userCat.items.length == 0
-                    ? Center(
-                        child: Text('add Categories'),
-                      )
-                    : GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 3 / 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10),
-                        itemCount: userCat.items.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            CategoriesWidget(
-                          userCat.items[index].id!,
-                          userCat.items[index].content,
-                        ),
-                      ),
-              );
-            }));
+          future: Provider.of<UserCategories>(context, listen: false)
+              .fetchDataFromDb(),
+          builder: (context, snapshot) => Consumer<UserCategories>(
+            builder: (context, userCat, ch) => userCat.items.length <= 0
+                ? ch!
+                : GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10),
+                    itemCount: userCat.items.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        CategoriesWidget(
+                      userCat.items[index].id!,
+                      userCat.items[index].content,
+                    ),
+                  ),
+            child: Center(
+              child: Text('add new categories'),
+            ),
+          ),
+        ));
   }
 }
